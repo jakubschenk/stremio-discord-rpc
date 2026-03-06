@@ -1,5 +1,9 @@
 # Discord RPC
 
+## Stremio Community
+
+This is a build tailored to be drag-n-drop into stremio-community source code in order to build your own stremio. I have fought with finding the right libraries and this should hopefully help you with not having to combine multiple sources to build *something*. Best of luck, no warranty on this, but feel free to submit an issue if it's really broken.
+
 ## Deprecation Notice
 
 This library has been deprecated in favor of Discord's GameSDK. [Learn more here](https://discordapp.com/developers/docs/game-sdk/sdk-starter-guide)
@@ -14,6 +18,10 @@ have callbacks for where a more complete game would do more things (joining, spe
 ## Documentation
 
 The most up to date documentation for Rich Presence can always be found on our [developer site](https://discordapp.com/developers/docs/rich-presence/how-to)! If you're interested in rolling your own native implementation of Rich Presence via IPC sockets instead of using our SDK—hey, you've got free time, right?—check out the ["Hard Mode" documentation](https://github.com/discordapp/discord-rpc/blob/master/documentation/hard-mode.md).
+
+## Build
+
+To build this version of discord-rpc, you have to have Visual Studio Community 2022 installed. After that, open the project in `x64 Native Tools Command Prompt for VS 2022` command prompt, install click library `python -m pip install click`. Then to build static libraries for Stremio Community, use `python build.py --static --just_release`.
 
 ## Basic Usage
 

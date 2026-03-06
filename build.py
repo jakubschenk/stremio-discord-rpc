@@ -158,7 +158,7 @@ def unreal(ctx):
             shutil.copy(os.path.join(i, LIBRARY_NAME), build[i])
 
 
-def build_lib(build_name, generator, options, just_release):
+def build_lib(build_name, generator, options, just_release, generator_platform=None):
     """ Create a dir under builds, run build and install in it """
     build_path = os.path.join(SCRIPT_PATH, 'builds', build_name)
     install_path = os.path.join(INSTALL_ROOT, build_name)
@@ -168,6 +168,8 @@ def build_lib(build_name, generator, options, just_release):
         initial_cmake = ['cmake', SCRIPT_PATH, '-DCMAKE_INSTALL_PREFIX=%s' % os.path.join('..', 'install', build_name)]
         if generator:
             initial_cmake.extend(['-G', generator])
+        if generator_platform:
+            initial_cmake.extend(['-A', generator_platform])
         for key in options:
             val = options[key]
             if type(val) is bool:
@@ -263,7 +265,7 @@ def libs(clean, static, shared, skip_formatter, just_release):
         static = True
         shared = True
 
-    static_options = {}
+    static_options = {'USE_STATIC_CRT': True}
     dynamic_options = {
         'BUILD_SHARED_LIBS': True,
         'USE_STATIC_CRT': True,
@@ -279,14 +281,13 @@ def libs(clean, static, shared, skip_formatter, just_release):
         dynamic_options['WARNINGS_AS_ERRORS'] = True
 
     if PLATFORM == 'win':
-        generator32 = 'Visual Studio 14 2015'
-        generator64 = 'Visual Studio 14 2015 Win64'
+        generator = 'Visual Studio 17 2022'
         if static:
-            build_lib('win32-static', generator32, static_options, just_release)
-            build_lib('win64-static', generator64, static_options, just_release)
+            build_lib('win32-static', generator, static_options, just_release, 'Win32')
+            build_lib('win64-static', generator, static_options, just_release, 'x64')
         if shared:
-            build_lib('win32-dynamic', generator32, dynamic_options, just_release)
-            build_lib('win64-dynamic', generator64, dynamic_options, just_release)
+            build_lib('win32-dynamic', generator, dynamic_options, just_release, 'Win32')
+            build_lib('win64-dynamic', generator, dynamic_options, just_release, 'x64')
     elif PLATFORM == 'osx':
         if static:
             build_lib('osx-static', None, static_options, just_release)
