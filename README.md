@@ -4,6 +4,10 @@
 
 This is a build tailored to be drag-n-drop into stremio-community source code in order to build your own stremio. I have fought with finding the right libraries and this should hopefully help you with not having to combine multiple sources to build *something*. Best of luck, no warranty on this, but feel free to submit an issue if it's really broken.
 
+## Credits
+
+All credits on this go to [discord/discord-rpc](https://github.com/discord/discord-rpc) and [Loukious/StreamioDiscordRichPresence](https://github.com/Loukious/StremioDiscordRichPresence). I am not an owner nor a contributor on this library and merely uploaded just because someone might have the same problem and will find it handy.
+
 ## Deprecation Notice
 
 This library has been deprecated in favor of Discord's GameSDK. [Learn more here](https://discordapp.com/developers/docs/game-sdk/sdk-starter-guide)
